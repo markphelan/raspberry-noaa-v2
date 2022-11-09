@@ -411,6 +411,13 @@ if [ "${ENABLE_MATRIX_PUSH}" == "true" ]; then
     ${PUSH_PROC_DIR}/push_matrix.sh "${matrix_push_annotation}" $push_file_list
 fi
 
+# handle an HTTP(S) POST of the images to a server if enabled
+if [ "${ENABLE_HTTP_PUSH}" == "true" ]; then
+    log "Pushing image enhancements to HTTP" "INFO"
+    ${PUSH_PROC_DIR}/push_http.sh $push_file_list
+fi
+
+
 rm "${NOAA_HOME}/tmp/map/${FILENAME_BASE}-map.png"
 
 # store enhancements if there was at least 1 good image created

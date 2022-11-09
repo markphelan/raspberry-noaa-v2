@@ -451,6 +451,13 @@ if [ "${ENABLE_MATRIX_PUSH}" == "true" ]; then
     ${PUSH_PROC_DIR}/push_matrix.sh "${matrix_push_annotation}" $push_file_list
 fi
 
+# handle an HTTP(S) POST of the images to a server if enabled
+if [ "${ENABLE_HTTP_PUSH}" == "true" ]; then
+    log "Pushing image enhancements to HTTP" "INFO"
+    ${PUSH_PROC_DIR}/push_http.sh $push_file_list
+fi
+
+
 # calculate and report total time for capture
 TIMER_END=$(date '+%s')
 DIFF=$(($TIMER_END - $TIMER_START))
